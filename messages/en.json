@@ -1,0 +1,364 @@
+{
+    "AccountPage": {
+        "spot": "Spot",
+        "transactionLog": "Transaction Log"
+    },
+    "ErrorPage": {
+        "title": "Houston, we have a problem",
+        "message": "But don’t worry, we’re working to fix it as soon as possible. Please try again in a few moments. Thanks for your patience!"
+    },
+    "NotFoundPage": {
+        "title": "We can't seem to find the page you're looking for",
+        "message": "Go back or head to the homepage to keep exploring.",
+        "buttonText": "Return to Homepage"
+    },
+    "Account": {
+        "AssetsBalances": {
+            "AssetsBalancesHeader": {
+                "placeholder": "Search Ticker",
+                "hideZeroBalances": "Hide Zero Balances"
+            },
+            "AssetsBalancesTable": {
+                "noData": "No data found."
+            },
+            "AssetTypeSelector": {
+                "stocks": "Stocks",
+                "etfs": "ETFs",
+                "crypto": "Crypto",
+                "forex": "Forex",
+                "bonds": "Bonds",
+                "commodities": "Commodities"
+            },
+            "columns": {
+                "ticker": "Ticker",
+                "amount": "Amount",
+                "price": "Price",
+                "totalPosition": "Total Position",
+                "trade": "Trade"
+            }
+        },
+        "Help": {
+            "BitcoinBalanceHelpModal": {
+                "sats": "SATS",
+                "bitcoin": "Bitcoin",
+                "totalDescription": "The total amount of {symbol} you hold in your Roxpaper spot account.",
+                "totalTitle": "Bitcoin Balance",
+                "availableDescription": "The total amount of {symbol} that are available for trading without any restrictions.",
+                "availableTitle": "Available",
+                "frozenTitle": "Locked",
+                "frozenDescription": "The total amount of {symbol} that are locked in open orders and cannot be traded until the orders are executed or canceled."
+            },
+            "HelpDialog": {
+                "usd": "USD",
+                "dialogClose": "Got it"
+            },
+            "TotalBalanceHelpModal": {
+                "sats": "SATS",
+                "bitcoin": "Bitcoin",
+                "totalDescription": "This is the total balance of your Roxpaper spot account, representing the sum of all assets, and valued in {symbol}",
+                "totalTitle": "Total Balance",
+                "availableDescription": "The total amount of assets that are available for trading without any restrictions.",
+                "availableTitle": "Available",
+                "frozenTitle": "Locked",
+                "frozenDescription": "The total amount of assets that are locked in open orders and cannot be traded until the orders are executed or canceled."
+            }
+        },
+        "BitcoinBalance": {
+            "btcBalance": "Bitcoin Balance"
+        },
+        "TotalBalance": {
+            "totBalance": "Total Balance",
+            "todayPnl": "Today's PnL"
+        },
+        "TransactionLog": {
+            "columns": {
+                "time": "Time",
+                "type": "Type",
+                "ticker": "Ticker",
+                "amount": "Amount",
+                "price": "Price",
+                "totalValue": "Total Value",
+                "status": "Status",
+                "action": "Action",
+                "details": "Details"
+            },
+            "orderDetail": {
+                "tradeId": "Trade ID",
+                "orderId": "Order ID",
+                "avgFilledPrice": "Average Filled Price",
+                "noDetailsFound": "No order details found",
+                "noDetailsError": "No order details error"
+            }
+        }
+    },
+    "Auth": {
+        "signIn": "Sign In",
+        "accessTheBeta": "Access the Beta",
+        "loading": "Loading...",
+        "InvalidLink": {
+            "title": "Oh no!",
+            "message": "It looks like your email confirmation link has expired or isn’t working. Don’t worry, just go back to Roxom and we’ll send you a new, updated link.",
+            "buttonText": "Go to Roxom"
+        },
+        "invalidOTPMessage": "Invalid verification code. Please try again.",
+        "Menu": {
+            "myAccount": "My Account",
+            "signOut": "Sign Out"
+        },
+        "NotReceivedPopup": {
+            "title": "Didn't receive the email verification code?",
+            "description": "The email verification code has been sent to your email. If you haven't received the code after several attempts, please try the following:",
+            "suggestions": {
+                "s1": "1. Check if it is in your junk/spam mail.",
+                "s2": "2. Make sure your email address is",
+                "s3": "3. The message may be delayed for a few minutes. Try again after 20 minutes.",
+                "s4": "4. Resend the verification code."
+            },
+            "ok": "Ok"
+        },
+        "OTPVerification": {
+            "title": "Verify your email",
+            "codeSent": "A 6-digit code has been sent to",
+            "timeDisclaimer": "Please enter it within the next 10 minutes.",
+            "didNotReceivedCode": "Didn't receive the code?"
+        },
+        "ResendOTPCounter": {
+            "resendOTP": "Resend code",
+            "inSeconds": "in {seconds} s"
+        },
+        "SignInForm": {
+            "title": "Hello Bitcoiner,\n Welcome to the Beta",
+            "agreeTo": "By creating an account, I agree to Roxom's",
+            "termsOfUse": "Terms of Use",
+            "and": "and",
+            "privacyPolicy": "Privacy Policy",
+            "buttonText": "Continue",
+            "betaText1": "Haven’t signed up for the Beta yet? ",
+            "clickHere": "Click here",
+            "betaText2": "to register and secure your spot."
+        }
+    },
+    "TermsOfServiceModal": {
+        "title": "You’re almost in, Bitcoiner!",
+        "description": "In this beta version, you’ll be using paper BTC and paper stocks to try out the platform.",
+        "checkBoxLabel": "To continue with the Roxpaper experience, please accept the <tycPage>terms and conditions</tycPage> and our <privacyPage>privacy policy</privacyPage>.",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+    },
+    "common": {
+        "Header": {
+            "roxPaper": "RoxPaper"
+        },
+        "comingSoon": "Coming Soon",
+        "Finance": {
+            "usd": "USD"
+        }
+    },
+    "Order": {
+        "Type": {
+            "limit": "Limit",
+            "market": "Market"
+        }
+    },
+    "OrderBook": {
+        "buy": "B",
+        "sell": "S",
+        "price": "Price",
+        "shares": "Shares",
+        "total": "Total",
+        "timestamp": "Timestamp"
+    },
+    "OrdersTable": {
+        "spotPairs": "Spot Pairs",
+        "tradeType": "Trade Type",
+        "spot": "Spot",
+        "orderType": "Order Type",
+        "direction": "Direction",
+        "orderValue": "Order Value",
+        "orderTime": "Order Time",
+        "orderId": "Order ID",
+        "filledOrderShares": "Filled/Order Shares",
+        "orderPrice": "Order Price",
+        "action": "Action",
+        "cancel": "Cancel",
+        "orderStatus": "Order Status",
+        "closed": "Closed",
+        "fictitious": "Fictitious",
+        "filled": "Filled",
+        "partiallyFilled": "Partially Filled",
+        "partiallyClosed": "Partially Closed",
+        "unfilled": "Unfilled",
+        "actions": "Actions",
+        "curiosity": "Curiosity killed the cat",
+        "details": "Details",
+        "noActiveOrders": "You don't have any active orders. Start trading!",
+        "noHistoricOrders": "Your order history is empty. Place an order to see it here.",
+        "toStartTrading": "to start trading",
+        "orderTypes": {
+            "limit": "Limit",
+            "market": "Market"
+        },
+        "orderSides": {
+            "buy": "Buy",
+            "sell": "Sell"
+        }
+    },
+    "OrderHistoryDetail": {
+        "filledValue": "Filled Value",
+        "filledPrice": "Filled Price",
+        "filledShares": "Filled Shares",
+        "tradingFees": "Trading Fees",
+        "filledTime": "Filled Time",
+        "tradeId": "Transaction ID",
+        "noOrderDetails": "No order details found",
+        "noOrderDetailsError": "An error occurred while searching the order details"
+    },
+    "OrderTicket": {
+        "enterAmount": "Please enter an amount",
+        "balanceNotEnough": "Your balance is not enough",
+        "sharesNotEnough": "Your availables shares are not enough",
+        "availableBalance": "Available balance",
+        "bought": "bought",
+        "sold": "sold",
+        "btcLimitPrice": "BTC limit price",
+        "marketPrice": "market price",
+        "orderPrice": "Order Price",
+        "orderDescription": "{shares} {assetName} will be {verb} at {orderTypeText}",
+        "orderSuccess": "Order submitted successfully!",
+        "orderError": "Failed to place the order: {error} Please try again.",
+        "shares": "Shares",
+        "buying": "buy",
+        "selling": "sell",
+        "sideBuy": "Buy",
+        "sideSell": "Sell",
+        "submitButton": "{side} {assetName}",
+        "maxLabel": "Max. {side}",
+        "estFeeLabel": "Est. Fee",
+        "orderValue": "Order Value"
+    },
+    "Pairs": {
+        "PairSelector": {
+            "spot": "Spot",
+            "perpetuals": "Perpetuals",
+            "options": "Options",
+            "stocks": "Stocks",
+            "etfs": "ETFs",
+            "crypto": "Crypto",
+            "forex": "Forex",
+            "bonds": "Bonds",
+            "commodities": "Commodities",
+            "inputPlaceholder": "e.g. 'AAPL'",
+            "notFoundIn": "not found in",
+            "noPairs": "No pairs found"
+        },
+        "PairSelectorModal": {
+            "pairSelector": "Pair selector"
+        }
+    },
+    "TradingCards": {
+        "ChartCard": {
+            "chart": "Chart",
+            "info": "Info"
+        },
+        "InfoCard": {
+            "sector": "Sector",
+            "headquarters": "Headquarters",
+            "listed": "Listed",
+            "website": "Website",
+            "employees": "Employees (FY)",
+            "figi": "FIGI",
+            "intro": "Intro"
+        },
+        "OrderBookCard": {
+            "orderBook": "Order book",
+            "recentTrades": "Recent trades"
+        },
+        "OrderPanelCard": {
+            "currentOrders": "Current Orders",
+            "orderHistory": "Order History",
+            "tradeHistory": "Trade History",
+            "trade": "Trade (Roxpaper)",
+            "limitMarketOrders": "Limit & Market Orders",
+            "showAllPositions": "Show All Positions"
+        },
+        "UnifiedTradeInfoCard": {
+            "chart": "Chart",
+            "orderBook": "Order book",
+            "recentTrades": "Recent trades",
+            "info": "Info"
+        }
+    },
+    "AssetSummary": {
+        "change24": "24h Change",
+        "high24": "24h High",
+        "low24": "24h Low",
+        "volume24": "24h Volume"
+    },
+    "ConfirmationModal": {
+        "checkBox": "Don't show this message again for future trades",
+        "timeInForce": "Time in Force",
+        "GoodTilCancelled": "Good-Till-Canceled",
+        "createOrder": "create{side} Order",
+        "cancel": "Cancel",
+        "limit": "Limit",
+        "market": "Market",
+        "orderPrice": "Order Price",
+        "orderValue": "Order Value",
+        "marketPrice": "Market Price",
+        "estFeeLabel": "Est. Fee"
+    },
+    "DataBar": {
+        "support": "Support",
+        "cookiesPref": "Cookies Preference",
+        "status": "Status",
+        "open": "Open",
+        "postMarket": "Post-Market",
+        "legals": "Legals"
+    },
+    "Nav": {
+        "tradeLabel": "Trade",
+        "spotLabel": "Spot Trading",
+        "spotDescription": "Buy & Sell on the Spot",
+        "assetsLabel": "My Assets",
+        "assetsDescription": "Monitor your balances and make quick decisions for your spot trades",
+        "markets": "Markets",
+        "accountTitle": "Spot Paper Account",
+        "accountDescription": "Monitor your balances and make quick decisions for your spot trades"
+    },
+    "NotificationBanner": {
+        "LoggedUser": {
+            "bannerText": "Want to learn more about the Beta? Click here for more information and start your journey with Roxpaper.",
+            "link": "Go to Help Center"
+        },
+        "NonLoggedUser": {
+            "bannerText": "Haven't joined the Beta yet? Sign up and be one of the first to try RoxPaper. Join the Beta",
+            "link": "Join the Beta"
+        }
+    },
+    "WelcomeBeta": {
+        "title": "Welcome to the",
+        "roxpaper": "Roxpaper Beta!",
+        "quickTips": "Quick Tips",
+        "tips1": "1. Trade real markets with demo BTC.",
+        "tips2": "2. Try out advanced trading features.",
+        "tips3": "3. Share youre feedback with us to improve the Roxpaper experience.",
+        "message": "Now that you have access, you can start exploring the Bitcoin-native financial market. Use your demo BTC to test out spot and derivative trading in a risk-free environment.",
+        "cta": "Get my BTC",
+        "feedback": "Your feedback is essential as we continue refining the product. We'd love to hear your thoughts!"
+    },
+    "ReadyToTrade": {
+        "title": "You're ready to Trade",
+        "message": "Your 0.5 BTC demo assets are available. Start trading now and explore all the features Roxpaper offers.",
+        "cta": "Let's Trade"
+    },
+    "Breadcrumbs": {
+        "transactionLog": "Transaction Log",
+        "spotAccount": "Spot Account"
+    },
+    "Legals": {
+        "legalsTitle": "Legals",
+        "termsOfUse": "Terms of Use",
+        "privacyPolicy": "Privacy Policy",
+        "seeTerms": "See terms"
+    }
+}

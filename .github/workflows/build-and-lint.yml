@@ -1,0 +1,19 @@
+name: Build and Lint
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+       - main*
+       - qa*
+
+jobs:
+  build_and_lint:
+    uses: roxom-markets/devops-scripts/.github/workflows/build-lint-website.yml@main
+    permissions:
+      id-token: write
+      contents: write
+    with:
+      ENVIRONMENTAL_VARIABLES_FILE: ${{ vars.ENVIRONMENTAL_VARIABLES_FILE_QA }}
+    secrets:
+      NEXT_PUBLIC_TURNSTILE_API_KEY: ""
+      NPM_TOKEN: ${{ secrets.GH_TOKEN }}

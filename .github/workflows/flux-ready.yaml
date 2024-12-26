@@ -1,0 +1,50 @@
+name: test-github-dispatch-provider
+
+on:
+  repository_dispatch:
+    types: [Kustomization/qa-app-landing-temp.flux-system,Kustomization/prod-app-landing-temp.flux-system]
+
+jobs:
+  extract_info:
+    runs-on: ubuntu-latest
+    outputs:
+      revision: ${{ steps.extract.outputs.revision }}
+      environment: ${{ steps.extract.outputs.environment }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - id: extract
+        run: |
+          echo "revision=$( echo ${{ github.event.client_payload.metadata.revision }} | cut -d':' -f2 )" >> $GITHUB_OUTPUT
+          if [[ ${{ github.event.action }} == *"qa"* ]]; then
+            echo "environment=qa" >> $GITHUB_OUTPUT
+          else
+            echo "environment=prod" >> $GITHUB_OUTPUT
+          fi
+
+  get_user:
+    needs: extract_info
+    uses: roxom-markets/devops-scripts/.github/workflows/get-info-from-commit.yml@main
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: read
+    with:
+      commit: ${{ needs.extract_info.outputs.revision }}
+      repository: ${{ github.event.repository.name }}
+      environment: ${{ needs.extract_info.outputs.environment }}
+    secrets: inherit
+  
+  notify-slack:
+    needs: [get_user, extract_info]
+    uses: roxom-markets/devops-scripts/.github/workflows/slack-notify-deployment.yml@main
+    permissions:
+      id-token: write
+      contents: write
+    with:
+      username: ${{ needs.get_user.outputs.user }}
+      message: "Timestamp(UTC): ${{ github.event.client_payload.timestamp }}. App: ${{ github.event.repository.name }}. Version: ${{needs.get_user.outputs.version}}. Message: ${{ github.event.client_payload.message }}"
+      environment: ${{ needs.extract_info.outputs.environment }}
+    secrets: inherit

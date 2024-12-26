@@ -1,0 +1,12 @@
+.github
+.husky
+.vscode
+tests
+.lintstagedrc.js
+.prettierrc.js
+jest*
+README.md
+.gitignore
+.eslintrc
+.eslintignore
+.env.example

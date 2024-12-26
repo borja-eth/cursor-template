@@ -1,0 +1,12 @@
+name: delete branch on close pr
+on: 
+  pull_request:
+    types: [closed]
+  
+jobs:
+  delete-branch:
+    uses: roxom-markets/devops-scripts/.github/workflows/auto-delete-branch.yml@main
+    permissions:
+      id-token: write
+      contents: write
+    secrets: inherit

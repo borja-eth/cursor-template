@@ -1,0 +1,69 @@
+name: Build and Deploy
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deployment-prod:
+    uses: roxom-markets/devops-scripts/.github/workflows/deploy-website.yml@main
+    permissions:
+      id-token: write
+      contents: write
+    with:
+      CONTAINER_IMAGE: ${{ github.event.repository.name }}:${{ github.event.release.name }}
+      AWS_REGION: 'us-east-2'
+      ENVIRONMENTAL_VARIABLES_FILE: ${{ vars.ENVIRONMENTAL_VARIABLES_FILE_PROD }}
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID_PROD }}
+      IAMROLE_GITHUB: ${{ secrets.IAMROLE_GITHUB_PROD }}
+      NEXT_PUBLIC_TURNSTILE_API_KEY: ${{ secrets.NEXT_PUBLIC_TURNSTILE_API_KEY_PROD }}
+      NPM_TOKEN: ${{ secrets.GH_TOKEN }}
+    
+  extract-base-branch:
+    needs: deployment-prod
+    runs-on: ubuntu-latest
+    outputs:
+      head-branch: ${{ steps.determine-head-branch.outputs.head-branch }}
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Determine head branch
+        id: determine-head-branch
+        run: |
+          RELEASE_NAME=${{ github.event.release.name }}
+          MAJOR_MINOR=$(echo $RELEASE_NAME | grep -oE '^[0-9]+\.[0-9]+')
+          MAJOR_MINOR="$MAJOR_MINOR.0"
+          echo "head-branch=release/$MAJOR_MINOR" >> $GITHUB_OUTPUT
+  
+  create-pr:
+    needs: extract-base-branch
+    uses: roxom-markets/devops-scripts/.github/workflows/create-pr.yml@main
+    name: Create PR
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+    with:
+      headBranch: ${{ needs.extract-base-branch.outputs.head-branch }}
+      baseBranch: 'main'
+      title: 'Merge release ${{ github.event.release.name }} into main'
+      body: 'Release ${{ github.event.release.name }} has been published. This PR is to merge the release branch into main.'
+    secrets: inherit
+
+  label-pr:
+    needs: create-pr
+    uses: roxom-markets/devops-scripts/.github/workflows/label-pr.yml@main
+    name: label PR
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+    with:
+      pr_number: ${{ needs.create-pr.outputs.pr_number }}
+      labels: "backport qa"
+    secrets: inherit
