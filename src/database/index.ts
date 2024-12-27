@@ -4,6 +4,7 @@ import { serverEnv } from "@/env/server";
 
 export const db = drizzle(serverEnv.DATABASE_URL, { schema });
 
+export * from "./schema";
 export * from "drizzle-orm";
 export type DatabaseConnection =
     | typeof db
