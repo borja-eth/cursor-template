@@ -33,16 +33,13 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: PropsWithChildren<{}>) {
-
     return (
         <html
             suppressHydrationWarning
             className={nunito_sans.className}
             lang="en"
         >
-            <body>
-                {children   }
-            </body>
+            <body>{children}</body>
         </html>
     );
 }

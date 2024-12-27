@@ -6,7 +6,6 @@ import AstronautIcon from "@/components/icons/AstronautIcon";
 import CommonLayout from "@/components/Layout/CommonLayout";
 
 export default function Error() {
-
     return (
         <CommonLayout>
             <ErrorContainer>

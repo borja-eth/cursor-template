@@ -4,7 +4,6 @@ import CommonLayout from "@/components/Layout/CommonLayout";
 import { Routes } from "@/routes";
 
 const NotFound = () => {
-
     return (
         <CommonLayout>
             <ErrorContainer>
