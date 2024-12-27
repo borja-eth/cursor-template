@@ -38,22 +38,6 @@
                 "argsIgnorePattern": "^_.*?$"
             }
         ]
-        /* "prettier/prettier": [
-            "warn",
-            {
-                "semi": true,
-                "tabWidth": 4,
-                "endOfLine": "lf",
-                "useTabs": false,
-                "printWidth": 120,
-                "singleQuote": true,
-                "trailingComma": "es5",
-                "bracketSpacing": true,
-                "arrowParens": "always",
-                "vueIndentScriptAndStyle": true,
-                "plugins": ["prettier-plugin-tailwindcss"]
-            }
-        ]*/
     },
     "plugins": [
         "@typescript-eslint/eslint-plugin",
