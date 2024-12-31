@@ -1532,10 +1532,10 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.29.1.tgz#c82f04a09ba481e13857d6f2516e072aaa51b7f4"
   integrity sha512-+10CMg9vt1MoHj6x1pxyjPSMjHTIlqs8/tBztXvPAx24SKs9jwVnKqHJumlH/IzhaPUaj3T6T6wfZr8okdXaIg==
 
-"@roxom-markets/spark-ui@0.2.3-rc.65":
-  version "0.2.3-rc.65"
-  resolved "https://npm.pkg.github.com/download/@roxom-markets/spark-ui/0.2.3-rc.65/59986c5abce57666b3ff68e2e27bff74b885bf89#59986c5abce57666b3ff68e2e27bff74b885bf89"
-  integrity sha512-fE34WFd5up2ckbD8lGxOfHNSnS6v5EzapBgxsuFC4DsGXDWSAIEtGu6ZEskt8h0WLrHiVNEeH40hFNIBb1oTAw==
+"@roxom-markets/spark-ui@^0.2.3-rc.68":
+  version "0.2.3-rc.68"
+  resolved "https://npm.pkg.github.com/download/@roxom-markets/spark-ui/0.2.3-rc.68/cadb60cc59b89c02b62e2f6aad9a6bdc896af15b#cadb60cc59b89c02b62e2f6aad9a6bdc896af15b"
+  integrity sha512-3bpQWmpz2+WDQi/6K1loYwAMhi1IwgTGTC3yBkkt/lzHCWxRLQ/UnCB2Xn4U9e9+BglNVkWYAhMkUDD6yapc+A==
   dependencies:
     "@hookform/resolvers" "^3.9.1"
     "@radix-ui/react-accordion" "^1.2.1"
@@ -4221,6 +4221,11 @@ jiti@^1.21.6:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.7.tgz#9dd81043424a3d28458b193d965f0d18a2300ba9"
   integrity sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==
 
+jiti@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.4.2.tgz#d19b7732ebb6116b06e2038da74a55366faef560"
+  integrity sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==
+
 jju@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/jju/-/jju-1.4.0.tgz#a3abe2718af241a2b2904f84a625970f389ae32a"
@@ -4417,6 +4422,11 @@ lucide-react@^0.453.0:
   resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.453.0.tgz#d37909a45a29d89680383a202ee861224b05ba6a"
   integrity sha512-kL+RGZCcJi9BvJtzg2kshO192Ddy9hv3ij+cPrVPWSRzgCWCVazoQJxOjAwgK53NomL07HB7GPHW120FimjNhQ==
 
+lucide-react@^0.469.0:
+  version "0.469.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.469.0.tgz#f16936ca6521482fef754a7eabb310e6c68e1482"
+  integrity sha512-28vvUnnKQ/dBwiCQtwJw7QauYnE7yd2Cyp4tTTJpvglX4EMpbflcdBgrgToX2j71B3YvugK/NH3BGUk+E/p/Fw==
+
 magic-string@^0.30.12:
   version "0.30.17"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.17.tgz#450a449673d2460e5bbcfba9a61916a1714c7453"
@@ -4530,6 +4540,11 @@ next-auth@^5.0.0-beta.25:
   integrity sha512-2dJJw1sHQl2qxCrRk+KTQbeH+izFbGFPuJj5eGgBZFYyiYYtvlrBeUw1E/OJJxTRjuxbSYGnCTkUIRsIIW0bog==
   dependencies:
     "@auth/core" "0.37.2"
+
+next-safe-action@^7.10.2:
+  version "7.10.2"
+  resolved "https://registry.yarnpkg.com/next-safe-action/-/next-safe-action-7.10.2.tgz#27bf715f1d79da9bfae9f725f4c8abc82739803f"
+  integrity sha512-Tpho8EolopnbJFYNuRuA1sXvUxndGuWhk17HbrPl701uuNOA+fs9zQx4vWCjkGWRvfZap67HqKOBueX7/x2Tug==
 
 next-themes@^0.3.0:
   version "0.3.0"

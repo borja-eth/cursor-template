@@ -14,8 +14,8 @@ const ThemeToggler = () => {
             name="theme-toggler"
             onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-            <Sun className="hidden dark:block" />
-            <Moon className="block dark:hidden" />
+            <Sun className="hidden dark:block size-4" />
+            <Moon className="block dark:hidden size-4" />
         </ActionIcon>
     );
 };

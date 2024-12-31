@@ -3,43 +3,49 @@ import type { Metadata } from "next";
 import "@roxom-markets/spark-ui/index.css";
 import "./globals.css";
 
-import { nunito_sans } from "@/helpers/fonts";
 import { PropsWithChildren } from "react";
 import { SITE_CONFIG } from "@/config/site";
+import { nunito_sans } from "@/helpers/fonts";
+import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-    title: SITE_CONFIG.name,
+    title: `Roxom - ${SITE_CONFIG.name}`,
     description: SITE_CONFIG.description,
     icons: {
         icon: [
-            { url: "/exchange/favicons/favicon.ico", sizes: "16x16" },
+            { url: "/favicons/favicon.ico", sizes: "16x16" },
             {
-                url: "/exchange/favicons/android-chrome-192x192.png",
+                url: "/favicons/android-chrome-192x192.png",
                 sizes: "192x192",
             },
             {
-                url: "/exchange/favicons/android-chrome-512x512.png",
+                url: "/favicons/android-chrome-512x512.png",
                 sizes: "512x512",
             },
         ],
         apple: [
             {
-                url: "/exchange/favicons/apple-touch-icon.png",
+                url: "/favicons/apple-touch-icon.png",
                 sizes: "180x180",
             },
         ],
     },
-    manifest: "/exchange/favicons/site.webmanifest",
+    manifest: "/favicons/site.webmanifest",
 };
 
-export default async function RootLayout({ children }: PropsWithChildren<{}>) {
+export default function RootLayout({ children }: PropsWithChildren<{}>) {
     return (
         <html
             suppressHydrationWarning
             className={nunito_sans.className}
             lang="en"
         >
-            <body>{children}</body>
+            <body>
+                <SessionProvider>
+                    <ThemeProvider attribute="class">{children}</ThemeProvider>
+                </SessionProvider>
+            </body>
         </html>
     );
 }
