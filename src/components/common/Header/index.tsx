@@ -2,7 +2,7 @@
 
 import ThemeToggler from "@/components/common/Theme/ThemeToggler";
 import { SITE_CONFIG } from "@/config/site";
-import { Button, SidebarTrigger, useSidebar } from "@roxom-markets/spark-ui";
+import { Button, useSidebar } from "@roxom-markets/spark-ui";
 import clsx from "clsx";
 import { SidebarIcon } from "lucide-react";
 import GradientLine from "../Brand/GradientLine";
@@ -15,22 +15,17 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
     const { theme_toggler = true, className, children } = props;
-    const { toggleSidebar, isMobile, open } = useSidebar();
+    const { toggleSidebar } = useSidebar();
 
     return (
-        <header
-            className={clsx(
-                "bg-background relative  w-full",
-                className,
-            )}
-        >
+        <header className={clsx("bg-background relative  w-full", className)}>
             <div className="flex flex-row justify-between items-center py-2">
                 <div className="flex flex-row justify-start items-center h-8 pl-2 lg:pl-5">
                     <div className="flex flex-row gap-1 lg:gap-4 items-center">
                         <Button
+                            size="icon"
                             variant="ghost"
                             onClick={toggleSidebar}
-                            size="icon"
                         >
                             <SidebarIcon className="size-4" />
                         </Button>

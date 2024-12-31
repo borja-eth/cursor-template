@@ -12,7 +12,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
             <SidebarInset>
                 <div className="mx-auto grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased w-full">
                     <Header />
-                    <div className="w-full">{children}</div>
+                    <div className="w-full p-2">{children}</div>
                 </div>
             </SidebarInset>
         </SidebarProvider>

@@ -59,16 +59,20 @@ const data = {
     settings: [
         {
             title: "Security",
-            url: "#",
+            url: Routes.SETTINGS.SECURITY.INDEX,
             icon: Lock,
             items: [
                 {
                     title: "Collaborators",
-                    url: "#",
+                    url: Routes.SETTINGS.SECURITY.USERS.INDEX,
                 },
                 {
-                    title: "Roles & Permissions",
-                    url: "#",
+                    title: "Roles",
+                    url: Routes.SETTINGS.SECURITY.ROLES.INDEX,
+                },
+                {
+                    title: "Permissions",
+                    url: Routes.SETTINGS.SECURITY.PERMISSIONS.INDEX,
                 },
             ],
         },

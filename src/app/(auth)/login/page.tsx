@@ -1,6 +1,6 @@
 import LoginOktaButton from "@/components/auth/login-okta-button";
 import { SITE_CONFIG } from "@/config/site";
-import { auth } from "@/lib/services/auth-service";
+import { auth } from "@/lib/auth/auth";
 import { Routes } from "@/routes";
 import {
     Card,

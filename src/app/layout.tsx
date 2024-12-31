@@ -8,6 +8,7 @@ import { SITE_CONFIG } from "@/config/site";
 import { nunito_sans } from "@/helpers/fonts";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "@roxom-markets/spark-ui";
 
 export const metadata: Metadata = {
     title: `Roxom - ${SITE_CONFIG.name}`,
@@ -43,7 +44,10 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
         >
             <body>
                 <SessionProvider>
-                    <ThemeProvider attribute="class">{children}</ThemeProvider>
+                    <ThemeProvider attribute="class">
+                        {children}
+                        <Toaster />
+                    </ThemeProvider>
                 </SessionProvider>
             </body>
         </html>

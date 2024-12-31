@@ -6,6 +6,7 @@ import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger,
+    useSidebar,
 } from "@roxom-markets/spark-ui";
 import {
     SidebarGroup,
@@ -18,6 +19,7 @@ import {
     SidebarMenuSubItem,
 } from "@roxom-markets/spark-ui";
 import { FC } from "react";
+import { useRouter } from "next/navigation";
 
 export const NavMain: FC<{
     items: {
@@ -32,6 +34,9 @@ export const NavMain: FC<{
     }[];
     title: string;
 }> = ({ items, title }) => {
+    const { push } = useRouter();
+    const { open, isMobile } = useSidebar();
+
     return (
         <SidebarGroup>
             <SidebarGroupLabel>{title}</SidebarGroupLabel>
@@ -45,7 +50,14 @@ export const NavMain: FC<{
                     >
                         <SidebarMenuItem>
                             <CollapsibleTrigger asChild>
-                                <SidebarMenuButton tooltip={item.title}>
+                                <SidebarMenuButton
+                                    tooltip={item.title}
+                                    onClick={() => {
+                                        if (!open && !isMobile) {
+                                            push(item.url);
+                                        }
+                                    }}
+                                >
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>
                                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />

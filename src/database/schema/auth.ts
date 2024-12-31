@@ -12,7 +12,7 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
-export const users = pgTable("user", {
+export const user = pgTable("user", {
     id: text("id")
         .primaryKey()
         .$defaultFn(() => crypto.randomUUID()),
@@ -22,7 +22,7 @@ export const users = pgTable("user", {
     image: text("image"),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
+export const userRelations = relations(user, ({ many }) => ({
     roles: many(usersToRoles),
 }));
 
@@ -31,7 +31,7 @@ export const accounts = pgTable(
     {
         userId: text("userId")
             .notNull()
-            .references(() => users.id, { onDelete: "cascade" }),
+            .references(() => user.id, { onDelete: "cascade" }),
         type: text("type").$type<AdapterAccountType>().notNull(),
         provider: text("provider").notNull(),
         providerAccountId: text("providerAccountId").notNull(),
@@ -54,7 +54,7 @@ export const sessions = pgTable("session", {
     sessionToken: text("sessionToken").primaryKey(),
     userId: text("userId")
         .notNull()
-        .references(() => users.id, { onDelete: "cascade" }),
+        .references(() => user.id, { onDelete: "cascade" }),
     expires: timestamp("expires", { mode: "date" }).notNull(),
 });
 
@@ -78,7 +78,7 @@ export const authenticators = pgTable(
         credentialID: text("credentialID").notNull().unique(),
         userId: text("userId")
             .notNull()
-            .references(() => users.id, { onDelete: "cascade" }),
+            .references(() => user.id, { onDelete: "cascade" }),
         providerAccountId: text("providerAccountId").notNull(),
         credentialPublicKey: text("credentialPublicKey").notNull(),
         counter: integer("counter").notNull(),
@@ -125,7 +125,7 @@ export const role = pgTable("role", {
 
 export const roleRelations = relations(role, ({ many }) => ({
     users: many(usersToRoles),
-    permissions: many(permissionsToRoles),
+    permissionsToRoles: many(permissionsToRoles),
 }));
 
 export const usersToRoles = pgTable(
@@ -136,7 +136,7 @@ export const usersToRoles = pgTable(
             .references(() => role.id, { onDelete: "cascade" }),
         userId: text("user_id")
             .notNull()
-            .references(() => users.id, { onDelete: "cascade" }),
+            .references(() => user.id, { onDelete: "cascade" }),
     },
     (t) => ({
         pk: primaryKey({ columns: [t.roleId, t.userId] }),
@@ -148,9 +148,9 @@ export const usersToRolesRelations = relations(usersToRoles, ({ one }) => ({
         fields: [usersToRoles.roleId],
         references: [role.id],
     }),
-    user: one(users, {
+    user: one(user, {
         fields: [usersToRoles.userId],
-        references: [users.id],
+        references: [user.id],
     }),
 }));
 
@@ -160,13 +160,12 @@ export const permission = pgTable(
         id: uuid("id").primaryKey().defaultRandom(),
         action: varchar("action", { length: 256 }).notNull(),
         entity: varchar("entity", { length: 256 }).notNull(),
-        access: varchar("access", { length: 256 }).notNull(),
         description: text("description").default(""),
         createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
         updatedAt: timestamp("updated_at", { withTimezone: true }),
     },
     (t) => ({
-        unq: unique().on(t.action, t.entity, t.access),
+        unq: unique().on(t.action, t.entity),
     }),
 );
 

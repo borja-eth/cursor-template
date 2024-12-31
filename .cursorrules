@@ -31,14 +31,15 @@ React/Next.js
 - Use functional components and TypeScript interfaces.
 - Use arrow function const for components.
 - Use SparkUI (`@roxom-markets/spark-ui`), and Tailwind CSS for components and styling.
-- SparkUI is a React UI library that has the same components as Shadcn UI, but with a more modern design and a more consistent look and feel.
+- SparkUI is a React UI library that has the same components as Shadcn UI, but with a more modern design and a more consistent look and feel. Import all components directly from the package `@roxom-markets/spark-ui` without any additional suffix.
 - Implement responsive design with Tailwind CSS.
 - Use mobile-first approach for responsive design.
 - Place static content and interfaces at file start.
 - Use content variables for static content outside render functions.
 - Minimize 'use client', 'useEffect', and 'setState'. Favor React Server Components (RSC).
 - Use Zod for form validation along with react-hook-form using `useForm` hook and `zodResolver` function.
-- Wrap client components in Suspense with fallback.
+- Use `useAction` hook for handling server actions. ALL forms should use `useAction` hook and provide feedback with onSuccess and onError callbacks with a toast message using 'success' and 'destructive' toast variants with `toast` from `useToast` hook from SparkUI.
+- Block form submission while `useAction` status is `executing`.
 - Use dynamic loading for non-critical components.
 - Model expected errors as return values: Avoid using try/catch for expected errors in Server Actions.
 - Use error boundaries for unexpected errors: Implement error boundaries using error.tsx and global-error.tsx files.
@@ -54,14 +55,20 @@ Key Conventions
     - Prefer server components and Next.js SSR features.
     - Use 'use client' only for Web API access in small components.
     - Avoid using 'use client' for data fetching or state management.
-4. Follow the repository layered structure
-    - Place zod validation schemas in src/lib/schemas/{{type}}-schemas.ts
-    - Place handlers in src/lib/actions/{{type}}-actions.ts
-    - Place services in src/lib/services/{{type}}-service.ts
-    - Place queries in src/lib/queries/{{type}}-queries.ts
-    - An action should call a servide and the service could call a query if need to persist data.
-    - All exported functions in queries should be async and recieve an optional `DatabaseConnection` (from src/database/index.ts) as the last argument. In case the database connection is not provided, the function should use the default connection.
-5. Define types for databases tables using drizzle `typeof table.$inferSelect` inside src/lib/types/{{type}}-types.ts. Also, extract the types of the schemas using zod `z.infer` inside the same file.
+4. Define types for databases tables using drizzle `typeof table.$inferSelect` inside src/lib/types/{{type}}-types.ts. Also, extract the types of the schemas using zod `z.infer` inside the same file.
+
+Repository Structure
+- Place zod validation schemas in src/lib/schemas/{{type}}-schemas.ts. All exports here should be zod schemas and it's name should finish with 'Schema'.
+- Place handlers in src/lib/actions/{{type}}-actions.ts. All exports here should be action functions and it's name should finish with 'Action'. DONT handle errors inside .action() calls, just return the awaited result of a service call.
+- Place services in src/lib/services/{{type}}-service.ts. All exports here should be service functions and it's name should explain what it does but not finish with 'Service'.
+- Place queries in src/lib/queries/{{type}}-queries.ts. All exports here should be query functions and it's name should finish with 'Query'. If the query logic contains multiple queries, it should be inside a transaction.
+- An action should call a servide and the service could call a query if need to persist data.
+- All exported functions in queries should be async and recieve an optional `DatabaseConnection` (from src/database/index.ts) as the last argument. In case the database connection is not provided, the function should use the default connection.
+
+About security:
+- NEVER call `createSafeAction` inside some actions file. Always use `action` and `authAction` from `src/lib/actions/base/action-clients.ts`. This will ensure that the action is properly authenticated and validated.
+- When using `authAction`, always pass the .metadata() to the action. This will ensure that the action is properly authenticated and validated. Indicate permissions inside { permissions: [] } metadata.
+- Import `Permissions` from `src/lib/types/permission-types.ts` and use it to indicate permissions inside the metadata.
 
 Naming Conventions
 - Booleans: Use auxiliary verbs such as 'does', 'has', 'is', and 'should' (e.g., isDisabled, hasError).
@@ -81,6 +88,3 @@ Styling
 - Use Tailwind CSS for styling, following the Utility First approach.
 - Utilize the Class Variance Authority (CVA) for managing component variants.
 - Use `cn` function in `src/lib/utils.ts` to extend classes with Tailwind CSS classes.
-
-Authentication
-

@@ -83,7 +83,7 @@ export function NavUser() {
                     {status === "authenticated" && (
                         <DropdownMenuContent
                             align="end"
-                            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-neutral-2 dark:bg-neutral-11 border border-border"
                             side={isMobile ? "bottom" : "right"}
                             sideOffset={4}
                         >
@@ -110,7 +110,7 @@ export function NavUser() {
                                     })
                                 }
                             >
-                                <LogOut className="size-4 mr-2" />
+                                <LogOut className="size-4 mr-2 text-destructive" />
                                 Log out
                             </DropdownMenuItem>
                         </DropdownMenuContent>
