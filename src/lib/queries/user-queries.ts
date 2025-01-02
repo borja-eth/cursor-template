@@ -74,7 +74,7 @@ export const getUserWithRolesQuery = async (
     };
 };
 
-export const findUserPermissions = async (
+export const findUserPermissionsQuery = async (
     id: string,
     connection: DatabaseConnection = db,
 ) => {
@@ -94,5 +94,5 @@ export const findUserPermissions = async (
         )
         .where(eq(user.id, id));
 
-    return permissions;
+    return await permissions;
 };

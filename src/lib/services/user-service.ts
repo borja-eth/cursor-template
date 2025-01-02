@@ -1,4 +1,4 @@
-import { findUserPermissions } from "@/lib/queries/user-queries";
+import { findUserPermissionsQuery } from "@/lib/queries/user-queries";
 import { getPermissionSlug } from "@/lib/utils/permission-utils";
 import { Permissions } from "@/lib/types/permission-types";
 
@@ -60,7 +60,7 @@ export const checkUserPermissions = async (
     userId: string,
     permission: Permissions[] | Permissions,
 ): Promise<Record<Permissions, boolean>> => {
-    const userPermissions = await findUserPermissions(userId);
+    const userPermissions = await findUserPermissionsQuery(userId);
 
     const permissionToCheck = Array.isArray(permission)
         ? permission

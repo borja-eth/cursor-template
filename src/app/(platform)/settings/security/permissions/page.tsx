@@ -1,7 +1,9 @@
 import { PermissionForm } from "@/components/auth/security/permission-form";
 import { PermissionFormHelpDialog } from "@/components/auth/security/permission-form-help-dialog";
 import { PermissionList } from "@/components/auth/security/permission-list";
+import { withPermissionPage } from "@/lib/middlewares/withPermissionPage";
 import { getAllPermissions } from "@/lib/services/permission-service";
+import { Permissions } from "@/lib/types/permission-types";
 import {
     Card,
     CardContent,
@@ -50,4 +52,6 @@ const PermissionPage = async () => {
     );
 };
 
-export default PermissionPage;
+export default withPermissionPage(PermissionPage, {
+    permissions: [Permissions.PERMISSION_LIST],
+});

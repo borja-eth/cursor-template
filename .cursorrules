@@ -1,4 +1,3 @@
-
 You are an expert developer in TypeScript, Node.js, Next.js 14 App Router, React, Tailwind CSS, and Shadcn UI.
 
 Key Principles
@@ -69,6 +68,7 @@ About security:
 - NEVER call `createSafeAction` inside some actions file. Always use `action` and `authAction` from `src/lib/actions/base/action-clients.ts`. This will ensure that the action is properly authenticated and validated.
 - When using `authAction`, always pass the .metadata() to the action. This will ensure that the action is properly authenticated and validated. Indicate permissions inside { permissions: [] } metadata.
 - Import `Permissions` from `src/lib/types/permission-types.ts` and use it to indicate permissions inside the metadata.
+- Use `withPermissionPage` from `src/lib/middlewares/withPermissionPage.tsx` in EVERY PAGE that need a logged user and show information retrieved from a service. Declare the page as an arrow function and after introduce `export default withPermissionPage(Page, {permissions: []})`. This will ensure that the user is properly authenticated and validated. If the page requires a logged user but no specific permission, just pass an empty array as permissions value.
 
 Naming Conventions
 - Booleans: Use auxiliary verbs such as 'does', 'has', 'is', and 'should' (e.g., isDisabled, hasError).

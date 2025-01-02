@@ -40,6 +40,10 @@ export const withPermissionPage =
                 return kick();
             }
 
+            if (permissions.length === 0) {
+                return Component(props);
+            }
+
             const permissionCheck = await checkUserPermissions(
                 user.id,
                 permissions,

@@ -1,5 +1,6 @@
 export enum SERVER_ERRORS {
     UNHANDLED_ERROR = "UNHANDLED_ERROR",
+    UNAUTHORIZED = "UNAUTHORIZED",
 }
 
 export class ServerError extends Error {

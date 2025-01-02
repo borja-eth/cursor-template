@@ -1,5 +1,7 @@
 import { RoleForm } from "@/components/auth/security/role-form";
+import { withPermissionPage } from "@/lib/middlewares/withPermissionPage";
 import { getAllPermissions } from "@/lib/services/permission-service";
+import { Permissions } from "@/lib/types/permission-types";
 import {
     Card,
     CardContent,
@@ -23,4 +25,6 @@ const NewRolePage = async () => {
     );
 };
 
-export default NewRolePage;
+export default withPermissionPage(NewRolePage, {
+    permissions: [Permissions.ROLE_CREATE],
+});

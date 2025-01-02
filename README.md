@@ -37,3 +37,11 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+### Next steps
+- Add documentation about how to handle authentication and authorization. -> Include this in .cursorrules
+- Add documentation about how to handle database migrations. -> Include this in .cursorrules
+- Add documentation about how to handle environment variables. -> Include this in .cursorrules
+- Add documentation about how to handle logging. -> Include this in .cursorrules
+- Create a tutorial to explain how to use the template.

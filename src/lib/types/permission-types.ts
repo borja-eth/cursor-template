@@ -38,9 +38,6 @@ export enum Permissions {
     // User permissions
     USER_LIST = "user:list",
     USER_READ = "user:read",
-    USER_CREATE = "user:create",
-    USER_UPDATE = "user:update",
-    USER_DELETE = "user:delete",
 
     // Role permissions
     ROLE_LIST = "role:list",
@@ -56,7 +53,6 @@ export enum Permissions {
     PERMISSION_CREATE = "permission:create",
     PERMISSION_UPDATE = "permission:update",
     PERMISSION_DELETE = "permission:delete",
-    PERMISSION_ASSIGN = "permission:assign",
 }
 
 export const allPermissions = [

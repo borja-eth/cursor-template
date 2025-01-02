@@ -1,5 +1,7 @@
 import { UserList } from "@/components/users/user-list";
+import { withPermissionPage } from "@/lib/middlewares/withPermissionPage";
 import { listRolesWithPermissions } from "@/lib/services/role-service";
+import { Permissions } from "@/lib/types/permission-types";
 
 export const metadata = {
     title: "User Management",
@@ -16,4 +18,6 @@ const UsersPage = async () => {
     );
 };
 
-export default UsersPage;
+export default withPermissionPage(UsersPage, {
+    permissions: [Permissions.USER_LIST],
+});

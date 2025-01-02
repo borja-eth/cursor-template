@@ -1,13 +1,14 @@
 import { RoleForm } from "@/components/auth/security/role-form";
+import { withPermissionPage } from "@/lib/middlewares/withPermissionPage";
 import { getAllPermissions } from "@/lib/services/permission-service";
 import { findRoleWithPermissions } from "@/lib/services/role-service";
+import { Permissions } from "@/lib/types/permission-types";
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from "@roxom-markets/spark-ui";
-import { FC } from "react";
 
 type EditRolePageProps = {
     params: {
@@ -15,7 +16,7 @@ type EditRolePageProps = {
     };
 };
 
-const EditRolePage: FC<EditRolePageProps> = async ({ params }) => {
+const EditRolePage = async ({ params }: EditRolePageProps) => {
     const { roleId } = params;
 
     const [role, permissions] = await Promise.all([
@@ -35,4 +36,6 @@ const EditRolePage: FC<EditRolePageProps> = async ({ params }) => {
     );
 };
 
-export default EditRolePage;
+export default withPermissionPage(EditRolePage, {
+    permissions: [Permissions.ROLE_UPDATE],
+});

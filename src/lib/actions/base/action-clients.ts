@@ -4,6 +4,8 @@ import { allPermissions } from "@/lib/types/permission-types";
 import { SERVER_ERRORS, ServerError } from "@/lib/types/server-error";
 import { createSafeActionClient } from "next-safe-action";
 import { z } from "zod";
+import { checkUserPermissions } from "@/lib/services/user-service";
+import { getLoggedUser } from "@/lib/auth/auth";
 
 const handleServerError = (e: Error) => {
     console.error(e.message);
@@ -29,32 +31,36 @@ export const authAction = createSafeActionClient({
         }),
 })
     .use(async ({ next }) => {
-        const session = {
-            user: {
-                id: "1",
-            },
-        };
+        try {
+            const user = await getLoggedUser();
 
-        if (!session || !session.user || !session.user.id) {
-            throw new Error("Not logged in - Unauthorized");
+            return await next({ ctx: { user } });
+        } catch (e) {
+            throw new ServerError(SERVER_ERRORS.UNAUTHORIZED);
         }
-
-        const { user } = session;
-
-        return await next({ ctx: { user } });
     })
-    .use(async ({ ctx, next }) => {
+    .use(async ({ ctx, next, metadata }) => {
         const { user } = ctx;
 
         if (!user.id) {
-            throw new Error("No tienes permisos para realizar esta acción");
+            throw new ServerError(SERVER_ERRORS.UNAUTHORIZED);
         }
 
-        const hasPermission = true;
-        // TODO: Check permissions
+        const permissionsCheck = await checkUserPermissions(
+            user.id,
+            metadata.permissions,
+        );
+
+        console.log(permissionsCheck);
+
+        const permissionsFn = metadata.partialPermissions ? "some" : "every";
+
+        const hasPermission = Object.values(permissionsCheck)[permissionsFn](
+            (permission) => permission === true,
+        );
 
         if (!hasPermission) {
-            throw new Error("No tienes permisos para realizar esta acción");
+            throw new ServerError(SERVER_ERRORS.UNAUTHORIZED);
         }
 
         return await next({ ctx });
