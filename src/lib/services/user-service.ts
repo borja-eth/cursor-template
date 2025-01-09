@@ -1,3 +1,5 @@
+import "server-only";
+
 import { findUserPermissionsQuery } from "@/lib/queries/user-queries";
 import { getPermissionSlug } from "@/lib/utils/permission-utils";
 import { Permissions } from "@/lib/types/permission-types";

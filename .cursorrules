@@ -56,13 +56,52 @@ Key Conventions
     - Avoid using 'use client' for data fetching or state management.
 4. Define types for databases tables using drizzle `typeof table.$inferSelect` inside src/lib/types/{{type}}-types.ts. Also, extract the types of the schemas using zod `z.infer` inside the same file.
 
-Repository Structure
+Repository Structure: The repository follows a layered architecture, with the following layers organized in folders under the src/lib directory:
 - Place zod validation schemas in src/lib/schemas/{{type}}-schemas.ts. All exports here should be zod schemas and it's name should finish with 'Schema'.
 - Place handlers in src/lib/actions/{{type}}-actions.ts. All exports here should be action functions and it's name should finish with 'Action'. DONT handle errors inside .action() calls, just return the awaited result of a service call.
 - Place services in src/lib/services/{{type}}-service.ts. All exports here should be service functions and it's name should explain what it does but not finish with 'Service'.
 - Place queries in src/lib/queries/{{type}}-queries.ts. All exports here should be query functions and it's name should finish with 'Query'. If the query logic contains multiple queries, it should be inside a transaction.
+
+Actions layer:
 - An action should call a servide and the service could call a query if need to persist data.
+- Every action should have this structure:
+```ts
+"use server";
+import { Permissions } from "@/lib/types/permission-types";
+
+export const nameOfTheActionAction = authAction
+    .metadata({
+        permissions: [Permissions.PERMISSION1, Permissions.PERMISSION2],
+    })
+    .schema(zodSchema)
+    .action(async ({ parsedInput, ctx }) => {
+        return await serviceFunction(parsedInput);
+    });
+```
+- If the action needs to use the authenicated user, access it in .action() with ctx.user.
+- If any adittional validation is needed and the permission is not enough for it, pass the logged userId to the service and implement the validation in the service. i.e.: A user can only update their own profile.
+- All files in actions layer should had the `"use server"` statement at the top.
+
+
+Queries layer:
 - All exported functions in queries should be async and recieve an optional `DatabaseConnection` (from src/database/index.ts) as the last argument. In case the database connection is not provided, the function should use the default connection.
+- Every query function should have this structure:
+```ts
+import "server only";
+import { db } from "@/database";
+export const nameQuery = async (
+    { param1, param2 }: NameQueryParams,
+    connection: DatabaseConnection = db,
+) => {
+    const result = await connection....
+    return result;
+};
+```
+- All the files inside queries layer should had the `import "server only"` statement at the top.
+
+Database changes and migrations:
+- NEVER create a new migration file manually. ALWAYS make schema changes in the code under src/database/schema/ folder firts and then suggest generating a new migration file using `yarn db:generate`.
+- NEVER edit the migration files manually. ALWAYS use `yarn db:generate` to generate a new migration file.
 
 About security:
 - NEVER call `createSafeAction` inside some actions file. Always use `action` and `authAction` from `src/lib/actions/base/action-clients.ts`. This will ensure that the action is properly authenticated and validated.
@@ -88,3 +127,4 @@ Styling
 - Use Tailwind CSS for styling, following the Utility First approach.
 - Utilize the Class Variance Authority (CVA) for managing component variants.
 - Use `cn` function in `src/lib/utils.ts` to extend classes with Tailwind CSS classes.
+

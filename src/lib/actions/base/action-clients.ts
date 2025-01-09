@@ -34,6 +34,10 @@ export const authAction = createSafeActionClient({
         try {
             const user = await getLoggedUser();
 
+            if (!user) {
+                throw new ServerError(SERVER_ERRORS.UNAUTHORIZED);
+            }
+
             return await next({ ctx: { user } });
         } catch (e) {
             throw new ServerError(SERVER_ERRORS.UNAUTHORIZED);

@@ -36,6 +36,10 @@ export const withPermissionPage =
 
             const user = await getLoggedUser();
 
+            if (!user) {
+                redirect(Routes.AUTH.LOGIN, RedirectType.replace);
+            }
+
             if (!user.id) {
                 return kick();
             }
@@ -59,7 +63,6 @@ export const withPermissionPage =
                 return kick();
             }
 
-            // TODO: Check organization permission for operation
             return Component(props);
         } catch (e) {
             console.error(e);

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { DatabaseConnection, db } from "@/database";
 import { permissionsToRoles, role } from "@/database/schema/auth";
 import type {
