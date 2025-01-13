@@ -8,6 +8,7 @@ export const serverEnv = createEnv({
         OKTA_CLIENT_ID: z.string().min(1),
         OKTA_CLIENT_SECRET: z.string().min(1),
         OKTA_ISSUER: z.string().min(1),
+        NEXTAUTH_URL: z.string().url().min(1),
     },
     experimental__runtimeEnv: process.env,
     skipValidation: process.env.BUILD === "true",
