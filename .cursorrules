@@ -14,8 +14,6 @@ JavaScript/TypeScript
 - Use TypeScript for all code. Avoid the usage of `any`. Be as much type-safe as possible.
 - Prefer interfaces over types.
 
-File structure
-
 Error Handling and Validation
 - Prioritize error handling and edge cases:
 - Handle errors and edge cases at the beginning of functions.
@@ -36,16 +34,12 @@ React/Next.js
 - Place static content and interfaces at file start.
 - Use content variables for static content outside render functions.
 - Minimize 'use client', 'useEffect', and 'setState'. Favor React Server Components (RSC).
-- Use Zod for form validation along with react-hook-form using `useForm` hook and `zodResolver` function.
-- Use `useAction` hook for handling server actions. ALL forms should use `useAction` hook and provide feedback with onSuccess and onError callbacks with a toast message using 'success' and 'destructive' toast variants with `toast` from `useToast` hook from SparkUI.
-- Block form submission while `useAction` status is `executing`.
-- Use dynamic loading for non-critical components.
-- Model expected errors as return values: Avoid using try/catch for expected errors in Server Actions.
 - Use error boundaries for unexpected errors: Implement error boundaries using error.tsx and global-error.tsx files.
 - Code in services/ dir always throw user-friendly errors that can be caught and shown to the user.
 - Use next-safe-action for all server actions.
 - Implement type-safe server actions with proper validation using Zod.
 - Handle errors gracefully and return appropriate responses.
+- DON'T use `index.ts` files to group actions, services, queries, and types exports. Only keep already created index files in the database folder.
 
 Key Conventions
 1. Rely on Next.js App Router for state changes and routing.
@@ -55,6 +49,48 @@ Key Conventions
     - Use 'use client' only for Web API access in small components.
     - Avoid using 'use client' for data fetching or state management.
 4. Define types for databases tables using drizzle `typeof table.$inferSelect` inside src/lib/types/{{type}}-types.ts. Also, extract the types of the schemas using zod `z.infer` inside the same file.
+
+Users interactions:
+- Use Zod for form validation along with react-hook-form using `useForm` hook and `zodResolver` function.
+- Use `useAction` hook for handling server actions. ALL forms should use `useAction` hook from 'next-safe-action/hooks' and provide feedback with onSuccess and onError callbacks with a toast message using 'success' and 'destructive' toast variants with `toast` from `useToast` hook from SparkUI.
+- Block form submission while `useAction` status is `executing`.
+- Use dynamic loading for non-critical components.
+- Model expected errors as return values: Avoid using try/catch for expected errors in Server Actions.
+- Add `refresh` function to the onSuccess callback of `useAction` to refresh the page if the operation needs to refresh the data.
+- Take this code as an example of how to use `useAction` hook:
+```ts
+const { refresh } = useRouter();
+const { toast } = useToast();
+const form = useForm<OperationInput>({
+    resolver: zodResolver(operationSchema),
+    defaultValues: {
+        action: "",
+        entity: "",
+        description: "",
+    } satisfies OperationInput,
+});
+
+const { execute, status } = useAction(operationAction, {
+    onSuccess: () => {
+        toast({
+            title: "Success!",
+            description: "Operation completed successfully",
+            variant: "success",
+        });
+        form.reset();
+        refresh();
+    },
+    onError: (error) => {
+        console.error(error);
+        toast({
+            title: "Error",
+            description: "Operation failed",
+            variant: "destructive",
+        });
+    },
+});
+```
+
 
 Repository Structure: The repository follows a layered architecture, with the following layers organized in folders under the src/lib directory:
 - Place zod validation schemas in src/lib/schemas/{{type}}-schemas.ts. All exports here should be zod schemas and it's name should finish with 'Schema'.
@@ -85,9 +121,11 @@ export const nameOfTheActionAction = authAction
 
 Queries layer:
 - All exported functions in queries should be async and recieve an optional `DatabaseConnection` (from src/database/index.ts) as the last argument. In case the database connection is not provided, the function should use the default connection.
+- NEVER attempt to create a hard deletion query. Use always the soft delete pattern with a `deletedAt`, `deletedById` and `deletedReason` (if applies) columns.
+- Take into account deletion status while querying data. By default, all queries SHOULD NOT return soft deleted data.
 - Every query function should have this structure:
 ```ts
-import "server only";
+import "server-only";
 import { db } from "@/database";
 export const nameQuery = async (
     { param1, param2 }: NameQueryParams,
@@ -97,7 +135,7 @@ export const nameQuery = async (
     return result;
 };
 ```
-- All the files inside queries layer should had the `import "server only"` statement at the top.
+- All the files inside queries layer should had the `import "server-only"` statement at the top.
 
 Database changes and migrations:
 - NEVER create a new migration file manually. ALWAYS make schema changes in the code under src/database/schema/ folder firts and then suggest generating a new migration file using `yarn db:generate`.

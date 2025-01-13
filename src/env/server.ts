@@ -10,4 +10,5 @@ export const serverEnv = createEnv({
         OKTA_ISSUER: z.string().min(1),
     },
     experimental__runtimeEnv: process.env,
+    skipValidation: process.env.BUILD === "true",
 });
