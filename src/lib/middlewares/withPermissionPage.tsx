@@ -66,6 +66,6 @@ export const withPermissionPage =
             return Component(props);
         } catch (e) {
             console.error(e);
-            redirect(Routes.AUTH.LOGIN, RedirectType.replace);
+            throw e;
         }
     };
