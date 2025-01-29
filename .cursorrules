@@ -166,3 +166,13 @@ Styling
 - Utilize the Class Variance Authority (CVA) for managing component variants.
 - Use `cn` function in `src/lib/utils.ts` to extend classes with Tailwind CSS classes.
 
+
+Development Order
+- Make sure you always follow the development order:
+1. Create the types in src/lib/types/{{type}}-types.ts.
+2. Create the zod schemas in src/lib/schemas/{{type}}-schemas.ts.
+3. Create the service functions in src/lib/services/{{type}}-service.ts.
+4. Create the queries in src/lib/queries/{{type}}-queries.ts.
+5. Create the actions in src/lib/actions/{{type}}-actions.ts.
+6. Create the components in src/components/{{type}}/{{component}}.tsx.
+7. Create the pages in src/app/{{type}}/{{component}}.tsx.
